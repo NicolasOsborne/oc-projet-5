@@ -20,23 +20,15 @@ const slides = [
   },
 ]
 
-// Event listeners des flèches de défilement
-
-let previousImage = document.querySelector('.arrow_left')
-previousImage.addEventListener('click', () => {
-  console.log('Défiler vers la gauche')
-})
-
-let nextImage = document.querySelector('.arrow_right')
-nextImage.addEventListener('click', () => {
-  console.log('Défiler vers la droite')
-})
-
-// Ajout des bullet-points en fonction du nombre de slides dans le tableau
+// Variables réutilisées
 
 const dots = document.querySelector('.dots')
+const carouselSlide = document.querySelector('.banner-img')
+const carouselText = document.querySelector('#banner p')
 
 let currentSlide = 0
+
+// Ajout des bullet-points en fonction du nombre de slides dans le tableau
 
 function addBulletpoints(slides) {
   for (let i = 0; i < slides.length; i++) {
@@ -52,11 +44,36 @@ function currentDot() {
     let dot = bulletpoints[index]
     if (index === currentSlide) {
       dot.classList.add('dot_selected')
+    } else {
+      dot.classList.remove('dot_selected')
     }
   }
 }
 
 addBulletpoints(slides)
-currentDot()
 
-console.log(dots)
+// Flèches de défilement - Image, Texte et bulletpoints
+
+let previousImage = document.querySelector('.arrow_left')
+previousImage.addEventListener('click', () => {
+  currentSlide--
+  carouselSlide.setAttribute(
+    'src',
+    '/assets/images/slideshow/' + slides[currentSlide].image
+  )
+  carouselText.innerHTML = slides[currentSlide].tagLine
+  currentDot()
+})
+
+let nextImage = document.querySelector('.arrow_right')
+nextImage.addEventListener('click', () => {
+  currentSlide++
+  carouselSlide.setAttribute(
+    'src',
+    '/assets/images/slideshow/' + slides[currentSlide].image
+  )
+  carouselText.innerHTML = slides[currentSlide].tagLine
+  currentDot()
+})
+
+currentDot()
