@@ -1,4 +1,4 @@
-// Tableau avec les images du carousel
+// Tableau avec les images et tagLines du carousel
 
 const slides = [
   {
@@ -20,11 +20,13 @@ const slides = [
   },
 ]
 
-// Variables réutilisées
+// Variables réutilisables
 
 const dots = document.querySelector('.dots')
 const carouselSlide = document.querySelector('.banner-img')
 const carouselText = document.querySelector('#banner p')
+const previousSlide = document.querySelector('.arrow_left')
+const nextSlide = document.querySelector('.arrow_right')
 
 let currentSlide = 0
 
@@ -37,6 +39,8 @@ function addBulletpoints(slides) {
     dots.appendChild(dot)
   }
 }
+
+// Changement d'apparence du bullet-point en fonction de la slide affichée
 
 function currentDot() {
   let bulletpoints = document.querySelectorAll('.dot')
@@ -52,11 +56,15 @@ function currentDot() {
 
 addBulletpoints(slides)
 
-// Flèches de défilement - Image, Texte et bulletpoints
+// Flèches de défilement - Changement Image, Texte et Bulletpoints
 
-let previousImage = document.querySelector('.arrow_left')
-previousImage.addEventListener('click', () => {
-  currentSlide--
+// Défilement à gauche (précédent)
+previousSlide.addEventListener('click', () => {
+  if (currentSlide === 0) {
+    currentSlide = slides.length - 1
+  } else {
+    currentSlide--
+  }
   carouselSlide.setAttribute(
     'src',
     '/assets/images/slideshow/' + slides[currentSlide].image
@@ -65,9 +73,13 @@ previousImage.addEventListener('click', () => {
   currentDot()
 })
 
-let nextImage = document.querySelector('.arrow_right')
-nextImage.addEventListener('click', () => {
-  currentSlide++
+// Défilement à droite (suivant)
+nextSlide.addEventListener('click', () => {
+  if (currentSlide === slides.length - 1) {
+    currentSlide = 0
+  } else {
+    currentSlide++
+  }
   carouselSlide.setAttribute(
     'src',
     '/assets/images/slideshow/' + slides[currentSlide].image
