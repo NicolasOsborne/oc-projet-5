@@ -67,7 +67,7 @@ previousSlide.addEventListener('click', () => {
   }
   carouselSlide.setAttribute(
     'src',
-    '/assets/images/slideshow/' + slides[currentSlide].image
+    './assets/images/slideshow/' + slides[currentSlide].image
   )
   carouselText.innerHTML = slides[currentSlide].tagLine
   currentDot()
@@ -82,10 +82,23 @@ nextSlide.addEventListener('click', () => {
   }
   carouselSlide.setAttribute(
     'src',
-    '/assets/images/slideshow/' + slides[currentSlide].image
+    './assets/images/slideshow/' + slides[currentSlide].image
   )
   carouselText.innerHTML = slides[currentSlide].tagLine
   currentDot()
 })
 
+// Navigation en cliquant sur les bulletpoints
+let bulletpoints = document.querySelectorAll('.dot')
+bulletpoints.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentSlide = index
+    carouselSlide.setAttribute(
+      'src',
+      './assets/images/slideshow/' + slides[currentSlide].image
+    )
+    carouselText.innerHTML = slides[currentSlide].tagLine
+    currentDot()
+  })
+})
 currentDot()
