@@ -54,6 +54,16 @@ function currentDot() {
   }
 }
 
+// Fonction de mise à jour des slides du carousel lors du défilement
+function carouselUpdate() {
+  carouselSlide.setAttribute(
+    'src',
+    './assets/images/slideshow/' + slides[currentSlide].image
+  )
+  carouselText.innerHTML = slides[currentSlide].tagLine
+  currentDot()
+}
+
 addBulletpoints(slides)
 
 // Flèches de défilement - Changement Image, Texte et Bulletpoints
@@ -65,12 +75,7 @@ previousSlide.addEventListener('click', () => {
   } else {
     currentSlide--
   }
-  carouselSlide.setAttribute(
-    'src',
-    './assets/images/slideshow/' + slides[currentSlide].image
-  )
-  carouselText.innerHTML = slides[currentSlide].tagLine
-  currentDot()
+  carouselUpdate()
 })
 
 // Défilement à droite (suivant)
@@ -80,12 +85,7 @@ nextSlide.addEventListener('click', () => {
   } else {
     currentSlide++
   }
-  carouselSlide.setAttribute(
-    'src',
-    './assets/images/slideshow/' + slides[currentSlide].image
-  )
-  carouselText.innerHTML = slides[currentSlide].tagLine
-  currentDot()
+  carouselUpdate()
 })
 
 // Navigation en cliquant sur les bulletpoints
@@ -93,12 +93,7 @@ let bulletpoints = document.querySelectorAll('.dot')
 bulletpoints.forEach((dot, index) => {
   dot.addEventListener('click', () => {
     currentSlide = index
-    carouselSlide.setAttribute(
-      'src',
-      './assets/images/slideshow/' + slides[currentSlide].image
-    )
-    carouselText.innerHTML = slides[currentSlide].tagLine
-    currentDot()
+    carouselUpdate()
   })
 })
 currentDot()
