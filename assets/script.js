@@ -20,7 +20,7 @@ const slides = [
   },
 ]
 
-// Variables réutilisables
+// Variables utilisées
 
 const dots = document.querySelector('.dots')
 const carouselSlide = document.querySelector('.banner-img')
@@ -30,7 +30,7 @@ const nextSlide = document.querySelector('.arrow_right')
 
 let currentSlide = 0
 
-// Ajout des bullet-points en fonction du nombre de slides dans le tableau
+// Création des bullet-points en fonction du nombre de slides dans le tableau
 
 function addBulletpoints(slides) {
   for (let i = 0; i < slides.length; i++) {
@@ -40,9 +40,15 @@ function addBulletpoints(slides) {
   }
 }
 
-// Changement d'apparence du bullet-point en fonction de la slide affichée
+// Fonction de mise à jour des slides du carousel lors du défilement
+function carouselUpdate() {
+  carouselSlide.setAttribute(
+    'src',
+    './assets/images/slideshow/' + slides[currentSlide].image
+  )
+  carouselText.innerHTML = slides[currentSlide].tagLine
 
-function currentDot() {
+  // Changement d'apparence du bullet-point en fonction de la slide affichée
   let bulletpoints = document.querySelectorAll('.dot')
   for (let index = 0; index < bulletpoints.length; index++) {
     let dot = bulletpoints[index]
@@ -54,17 +60,8 @@ function currentDot() {
   }
 }
 
-// Fonction de mise à jour des slides du carousel lors du défilement
-function carouselUpdate() {
-  carouselSlide.setAttribute(
-    'src',
-    './assets/images/slideshow/' + slides[currentSlide].image
-  )
-  carouselText.innerHTML = slides[currentSlide].tagLine
-  currentDot()
-}
-
 addBulletpoints(slides)
+carouselUpdate()
 
 // Flèches de défilement - Changement Image, Texte et Bulletpoints
 
@@ -96,4 +93,3 @@ bulletpoints.forEach((dot, index) => {
     carouselUpdate()
   })
 })
-currentDot()
